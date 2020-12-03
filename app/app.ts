@@ -11,6 +11,9 @@ import redisClient from 'connect-redis';
 import passport from 'passport';
 import { addHook } from 'sequelize-typescript';
 import authRouter from './auth/auth.route';
+import morgan from 'morgan';
+import { logger } from './app.logger';
+import helmet from 'helmet';
 dotenv.config();
 
 const app = express();
@@ -18,6 +21,16 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+//Helmet for secure express app
+app.use(helmet());
+
+
+//Logger
+app.use(morgan('dev', {stream: {write: message => logger.info(message) } }))
+
+
+//Routes
 app.use('/user', userRouter);
 app.use('/user/profile', userProfileRouter);
 app.use('/auth', authRouter);
@@ -53,4 +66,6 @@ app.listen(process.env.PORT || 3000, async () =>{
         console.log(ex);
     }
 });
+
+export default app;
 

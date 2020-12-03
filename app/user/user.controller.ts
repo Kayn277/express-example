@@ -94,10 +94,7 @@ class UserController {
     @bind
     public async createOne(req: Request, res: Response) {
         try {
-            
-            console.log(req.body);
             let user = req.body as UserDTO;
-            console.log(req.body);
             let checkUser = await this.userModel.findOne({where: {email: user.email}});
             if(!checkUser) {
                 if(user) {
