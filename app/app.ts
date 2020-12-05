@@ -14,6 +14,8 @@ import authRouter from './auth/auth.route';
 import morgan from 'morgan';
 import { logger } from './app.logger';
 import helmet from 'helmet';
+import verification from './verification/verification.route';
+
 dotenv.config();
 
 const app = express();
@@ -34,6 +36,7 @@ app.use(morgan('dev', {stream: {write: message => logger.info(message) } }))
 app.use('/user', userRouter);
 app.use('/user/profile', userProfileRouter);
 app.use('/auth', authRouter);
+app.use('/verify', verification);
 
 app.get('/', (req, res) => {
 	res.send(process.env.DB_HOST );

@@ -3,6 +3,7 @@ import {Request, Response } from "express";
 import { bind } from "bind-decorator";
 import { parse } from "path";
 import { UserProfileDTO } from "./dto/user_profile.dto";
+import logger from '../../app.logger';
 //getAll
 //getOneById
 //deleteOneById
@@ -26,6 +27,7 @@ export class UserProfileController {
                 res.status(404).send("Not found any profile");
             }
         } catch (ex) {
+            logger.error(ex.message);
             res.status(500).send(ex);
         }
     }
@@ -47,6 +49,7 @@ export class UserProfileController {
                 res.status(401).send("Id is not a number");
             }
         } catch (ex) {
+            logger.error(ex.message);
             res.status(500).send(ex);
         }
     }
@@ -68,6 +71,7 @@ export class UserProfileController {
                 res.status(401).send("Id is not a number");
             }
         } catch (ex) {
+            logger.error(ex.message);
             res.status(500).send(ex);
         }
     }
@@ -90,6 +94,7 @@ export class UserProfileController {
                 res.status(401).send("Is not a user profile");
             }
         } catch (ex) {
+            logger.error(ex.message);
             res.status(500).send(ex);
         }
     }
@@ -108,6 +113,7 @@ export class UserProfileController {
                 res.status(401).send("Is not a user profile");
             }
         } catch (ex) {
+            logger.error(ex.message);
             res.status(500).send(ex);
         }
     }
